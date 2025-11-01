@@ -17,6 +17,6 @@ Sistema de Irrigação em miniatura demonstrando como funcionaria uma irrigaçã
   <p></p>A Mini válvula solenoide esta conctada a um relé. Esta válvula ao ser energizada fecha a passagem de água, e quando o sistema decide fazer a irrigação de água, a válvula não é energizada por um tempo previamente estabelecido, dependendo da área de irrigação, assim liberando a passagems de água. O relé ao receber o sinal do ESP32, fecha a passagem da porta 3,3 V para a válvula, libreando a passagem de água.</p>
 
 
-Versão do sistema feito no Wokwi, <a href="https://www.exemplo.com](https://wokwi.com/projects/440668704348163073">Link</a>
+Versão do sistema feito no Wokwi, <a href="https://wokwi.com/projects/440668704348163073">Link</a>
 
 
