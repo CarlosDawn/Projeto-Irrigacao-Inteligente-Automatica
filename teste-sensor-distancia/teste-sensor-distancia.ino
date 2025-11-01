@@ -1,35 +1,35 @@
 
-#include <LiquidCrystal_I2C.h>
+#define TRIG_PIN 4 // ESP32 pin GPIO23 connected to Ultrasonic Sensor's TRIG pin
+#define ECHO_PIN 2 // ESP32 pin GPIO22 connected to Ultrasonic Sensor's ECHO pin
 
-#include <NewPing.h>
-
-//Configuração do LCD 16x2;
-LiquidCrystal_I2C LCD = LiquidCrystal_I2C(0x27, 16, 2);
-
-const int trigPin = 4;
-const int echoPin = 2;
-float leitura;
-NewPing sonar(trigPin, echoPin); 
+float duration_us, distance_cm;
 
 void setup() {
-  Serial.begin(115200);
+  // begin serial port
+  Serial.begin (115200);
 
-  LCD.init();
-  LCD.backlight();
-  LCD.setCursor(0, 0);
-  LCD.print("Sistema de Irri-");
-  LCD.setCursor(0, 1);
-  LCD.print("gacao Ligada");
-
+  // configure the trigger pin to output mode
+  pinMode(TRIG_PIN, OUTPUT);
+  // configure the echo pin to input mode
+  pinMode(ECHO_PIN, INPUT);
 }
 
 void loop() {
+  // generate 10-microsecond pulse to TRIG pin
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
 
-  leitura = sonar.ping_cm();
-  Serial.print("Distância: ");
-  Serial.print(leitura);
+  // measure duration of pulse from ECHO pin
+  duration_us = pulseIn(ECHO_PIN, HIGH);
+
+  // calculate the distance
+  distance_cm = 0.017 * duration_us;
+
+  // print the value to Serial Monitor
+  Serial.print("distance: ");
+  Serial.print(distance_cm);
   Serial.println(" cm");
 
-  delay(2000);
-
+  delay(500);
 }
